@@ -20,6 +20,7 @@ import { SummaryComponent } from './Components/details-page/summary/summary.comp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeneralComponent } from './Components/details-page/general/general.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsComponentComponent } from './Components/details-page/charts-component/charts-component.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     DetailsPageComponent,
     SummaryComponent,
-    GeneralComponent
+    GeneralComponent,
+    ChartsComponentComponent
   ],
   imports: [
     BrowserModule,

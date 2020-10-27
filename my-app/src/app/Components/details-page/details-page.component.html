@@ -43,7 +43,10 @@
             <mat-tab label="Top News">Top News</mat-tab>
             <mat-tab label="Charts">
                <ng-template matTabContent>
-                  this is chart
+                  <app-charts-component
+                     [hisctoricalData]="hisctoricalData"
+                     [ticker]="tickerUrlParam">
+                  </app-charts-component>
                </ng-template>
             
             </mat-tab>

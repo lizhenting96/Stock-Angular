@@ -66,6 +66,7 @@ export class SummaryComponent implements OnInit {
         }
       },
       series: [{
+        name: this.companyDescription.ticker,
         data: this.priceData,
         type: 'line',
         getExtremesFromAll: true,

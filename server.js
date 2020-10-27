@@ -36,6 +36,7 @@ app.get('/gethistory/:ticker', (req, res) => {
   var ticker = req.params.ticker
   var date = new Date()
   date.setFullYear(date.getFullYear() - 2)
+  console.log(date)
   var curDateStr = new Intl.DateTimeFormat('fr-ca', { month: '2-digit', day: '2-digit', year: 'numeric' }).format(date)
   fetch(`https://api.tiingo.com/tiingo/daily/${ticker}/prices?startDate=${curDateStr}&token=c6f1c961e0a39fc4cb1315782a41a40e354f03c4`)
   .then(result => result.json())
