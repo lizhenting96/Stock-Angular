@@ -1,0 +1,55 @@
+<mat-spinner class="mx-auto" *ngIf="!companyDescription || !latestPrice || !dailyData || !hisctoricalData; else elseBlock1"></mat-spinner>
+<ng-template #elseBlock1>
+   <div class="col-md-8 col-10 mx-auto px-0" *ngIf="tickerNotExists; else elseBlock2">
+      <div class="alert alert-danger text-center mt-5" role="alert">
+         No results found. Please enter valid Ticker
+      </div>
+   </div>
+   
+   <ng-template #elseBlock2>
+      <div class="col-md-8 col-10 mx-auto px-0" >
+         <!-- first row, Ticker & Last Price -->
+         <app-general 
+            [companyDescription]="companyDescription" 
+            [lastPrice]="lastPrice" 
+            [change]="change"
+            [changePercent]="changePercent" 
+            [curTimeStamp]="curTimeStamp" 
+            [changeStatus]="changeStatus"
+         ></app-general>
+         <!-- Market Status -->
+         <div class="row mt-2 mb-3">
+            <div class="mx-auto" *ngIf="isMarketOpen" id="market-open">Market is Open</div>
+            <div class="mx-auto" *ngIf="!isMarketOpen" id="market-closed">Market Closed on {{dataTimeStamp}}</div>
+   
+         </div>
+         <!-- Material Tabs -->
+         <mat-tab-group animationDuration="0ms" mat-align-tabs="center" mat-stretch-tabs>
+   
+            <!-- Summary Tab -->
+            <mat-tab label="Summary">
+               <ng-template matTabContent>
+                  <app-summary 
+                     [latestPrice]="latestPrice" 
+                     [companyDescription]="companyDescription" 
+                     [dailyData]="dailyData"
+                     [changeStatus]="changeStatus"
+                     [isMarketOpen]="isMarketOpen"
+                     *ngIf="latestPrice && companyDescription && dailyData">
+                  </app-summary>
+               </ng-template> 
+   
+            </mat-tab>
+            <mat-tab label="Top News">Top News</mat-tab>
+            <mat-tab label="Charts">
+               <ng-template matTabContent>
+                  this is chart
+               </ng-template>
+            
+            </mat-tab>
+         </mat-tab-group>
+      </div>
+   </ng-template>
+   
+   
+</ng-template>

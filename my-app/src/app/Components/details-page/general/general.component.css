@@ -1,0 +1,14 @@
+.row {
+   font-size: 0.8rem;
+}
+#ticker {
+   font-size: 2.2rem;
+   font-weight: 500;
+}
+#last-price {
+   font-size: 2.2rem;
+   font-weight: 500;
+}
+#company-name, #change {
+   font-size: 1.5rem;
+}

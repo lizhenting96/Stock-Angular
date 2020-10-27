@@ -1,0 +1,25 @@
+/* Modify the background color */ 
+          
+.navbar-custom { 
+   background-color:rgb(100, 70, 225); 
+} 
+/* Modify brand and text color */ 
+ 
+.navbar-custom .navbar-brand, 
+.navbar-custom .navbar-text { 
+   color:white; 
+} 
+
+/* Mobile toggle */
+.nav-link{
+   text-align: right;
+}
+
+/* Link active */
+.nav-link.active {
+   color: white;
+   border-style: solid;
+   border-radius: 10px;
+   border-color: white;
+   border-width: 1px;
+}

@@ -1,0 +1,32 @@
+/* header */
+.display-4 {
+   font-size: 4.5rem;
+}
+h1 {
+   margin-top: 6rem;
+   margin-bottom: 4rem;
+}
+/* input form */
+svg {
+   fill: rgb(100, 70, 225);
+}
+input[type="text"]:focus {
+   border-style: none;
+   border-color: rgba(255, 255, 255, 0);
+   box-shadow: 0 1px 1px rgba(255, 255, 255, 0) inset, 0 0 8px rgba(255, 255, 255, 0);
+   outline: 0 none;
+}
+.input-group {
+   width: 300px;
+   border: 2px solid rgb(100, 70, 225);
+   border-radius: 20px;
+   padding: 0 13px;
+}
+.form-control {
+   padding-left: 0.25rem;
+   padding-right: 0.25rem;
+}
+/* autocomplete dropdow */
+.full-name {
+   font-size: 0.8rem;
+}

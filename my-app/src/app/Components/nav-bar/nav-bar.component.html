@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md sticky-top navbar-dark navbar-custom">
+   <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">Stock Search</a>
+
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+         <ul class="navbar-nav ml-auto">
+            <li class="nav-item px-1">
+               <a class="nav-link px-3" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                  Search
+               </a>
+            </li>
+            <li class="nav-item px-1">
+               <a class="nav-link px-3" routerLink="/watchlist" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                  true}">Watchlist</a>
+            </li>
+            <li class="nav-item px-1">
+               <a class="nav-link px-3" routerLink="/portfolio" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                  true}">Portfolio</a>
+            </li>
+         </ul>
+      </div>
+   </div>
+</nav>

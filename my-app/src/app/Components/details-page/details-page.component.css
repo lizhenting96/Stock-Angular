@@ -1,0 +1,15 @@
+.row {
+   font-size: 0.8rem;
+}
+#market-closed {
+   color: brown;
+   background-color: rgba(165, 42, 42, 0.2);
+}
+#market-open {
+   color: darkgreen;
+   background-color: rgba(0, 100, 0, 0.2);
+}
+.alert {
+   color: black;
+   font-size: 0.8rem;
+}
