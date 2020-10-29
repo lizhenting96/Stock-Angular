@@ -12,6 +12,7 @@ export class SearchService {
   latestpriceUrl: string = 'http://localhost:8080/getlatestprice'
   dailyDataUrl: string = 'http://localhost:8080/getdaily'
   historyUrl: string = 'http://localhost:8080/gethistory'
+  newsUrl: string = 'http://localhost:8080/getnews'
   constructor(private router: Router, private http: HttpClient) { }
 
   onSearch(ticker: string) {
@@ -29,5 +30,8 @@ export class SearchService {
   }
   getHistory(ticker: string): Observable<any> {
     return this.http.get(this.historyUrl + `/${ticker}`)
+  }
+  getNews(ticker: string): Observable<any> {
+    return this.http.get(this.newsUrl + `/${ticker}`)
   }
 }

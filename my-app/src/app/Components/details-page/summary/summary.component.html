@@ -1,6 +1,6 @@
 <div class="row mx-0 mt-4">
    <!-- Left part of Summary Tab -->
-   <div class="col-md-6 ">
+   <div class="col-lg-6 ">
       <!-- Some data from latest price -->
       <div class="row mx-0 mb-5 px-2 text-center">
          <div class="row mx-0 w-100">
@@ -38,14 +38,14 @@
       </div>
       <!-- Company Description -->
       <div class="row mx-0">
-         <div class="col-md-12 px-0">
+         <div class="col-lg-12 px-0">
             <h5 class="text-center" id="description-header">Company's Description</h5>
             <p class="mt-4 mb-2">Start Date: {{companyDescription.startDate}}</p>
             <p>{{companyDescription.description}}</p>
          </div>
       </div>
    </div>
-   <div class="col-md-6">
+   <div class="col-lg-6">
          <highcharts-chart 
          [Highcharts]="Highcharts"
          [options]="chartOptions"

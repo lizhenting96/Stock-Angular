@@ -1,13 +1,13 @@
-<mat-spinner class="mx-auto" *ngIf="!companyDescription || !latestPrice || !dailyData || !hisctoricalData; else elseBlock1"></mat-spinner>
+<mat-spinner class="mx-auto" *ngIf="!companyDescription || !latestPrice || !dailyData || !hisctoricalData || !newsData; else elseBlock1"></mat-spinner>
 <ng-template #elseBlock1>
-   <div class="col-md-8 col-10 mx-auto px-0" *ngIf="tickerNotExists; else elseBlock2">
+   <div class="col-lg-8 col-10 mx-auto px-0" *ngIf="tickerNotExists; else elseBlock2">
       <div class="alert alert-danger text-center mt-5" role="alert">
          No results found. Please enter valid Ticker
       </div>
    </div>
    
    <ng-template #elseBlock2>
-      <div class="col-md-8 col-10 mx-auto px-0" >
+      <div class="col-lg-8 col-10 mx-auto px-0" >
          <!-- first row, Ticker & Last Price -->
          <app-general 
             [companyDescription]="companyDescription" 
@@ -40,7 +40,11 @@
                </ng-template> 
    
             </mat-tab>
-            <mat-tab label="Top News">Top News</mat-tab>
+            <mat-tab label="Top News">
+               <app-news
+                  [newsData]='newsData'>
+               </app-news>
+            </mat-tab>
             <mat-tab label="Charts">
                <ng-template matTabContent>
                   <app-charts-component

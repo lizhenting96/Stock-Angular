@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeneralComponent } from './Components/details-page/general/general.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsComponentComponent } from './Components/details-page/charts-component/charts-component.component';
+import { NewsComponent } from './Components/details-page/news/news.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ChartsComponentComponent } from './Components/details-page/charts-compo
     DetailsPageComponent,
     SummaryComponent,
     GeneralComponent,
-    ChartsComponentComponent
+    ChartsComponentComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,

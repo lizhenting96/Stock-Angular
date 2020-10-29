@@ -25,6 +25,8 @@ export class DetailsPageComponent implements OnInit {
   dailyData: any[]
   // data for historical chart
   hisctoricalData: any[]
+  // data for news
+  newsData: any[]
   // control
   changeStatus: string
   isMarketOpen: boolean = false
@@ -54,6 +56,8 @@ export class DetailsPageComponent implements OnInit {
         this.tickerNotExists = true
         this.dailyData = []
         this.latestPrice = {}
+        this.newsData = []
+        this.hisctoricalData = []
       }
       else {
         // ticker exists
@@ -72,7 +76,9 @@ export class DetailsPageComponent implements OnInit {
         this.searchService.getHistory(this.tickerUrlParam).subscribe(results => {
           this.hisctoricalData = results
         })
-
+        this.searchService.getNews(this.tickerUrlParam).subscribe(results => {
+          this.newsData = results.articles
+        })
         // set refreshing
         // this.interval = setInterval(() => {
         //   this.updatePartial()
