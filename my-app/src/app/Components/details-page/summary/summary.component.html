@@ -2,38 +2,38 @@
    <!-- Left part of Summary Tab -->
    <div class="col-lg-6 ">
       <!-- Some data from latest price -->
-      <div class="row mx-0 mb-5 px-2 text-center">
+      <div class="row mx-0 mb-5 px-0 px-md-3 text-center">
          <div class="row mx-0 w-100">
-            <div class="col-2 offset-1 text-left px-0">High Price: </div>
-            <div class="col-5 text-left px-0 align-self-center">{{latestPrice.high}}</div>
-            <div class="col-2 text-left px-0" *ngIf="isMarketOpen">Mid Price: </div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && latestPrice.mid">{{latestPrice.mid}}</div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && !latestPrice.mid"> - </div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center">High Price: </div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.high}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Mid Price: </div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && latestPrice.mid">{{latestPrice.mid}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && !latestPrice.mid"> - </div>
 
          </div>
          <div class="row mx-0 w-100">
-            <div class="col-2 offset-1 text-left px-0">Low Price: </div>
-            <div class="col-5 text-left px-0 align-self-center">{{latestPrice.low}}</div>
-            <div class="col-2 text-left px-0" *ngIf="isMarketOpen">Ask Price: </div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askPrice}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center">Low Price: </div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.low}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Ask Price: </div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askPrice}}</div>
          </div>
          <div class="row mx-0 w-100">
-            <div class="col-2 offset-1 text-left px-0">Open Price: </div>
-            <div class="col-5 text-left px-0 align-self-center">{{latestPrice.open}}</div>
-            <div class="col-2 text-left px-0" *ngIf="isMarketOpen">Ask Size: </div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askSize}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center">Open Price: </div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.open}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Ask Size: </div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askSize}}</div>
          </div>
          <div class="row mx-0 w-100">
-            <div class="col-2 offset-1 text-left px-0">Prev. Close: </div>
-            <div class="col-5 text-left px-0 align-self-center">{{latestPrice.prevClose}}</div>
-            <div class="col-2 text-left px-0" *ngIf="isMarketOpen">Bid Price: </div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidPrice}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center">Prev. Close: </div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.prevClose}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Bid Price: </div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidPrice}}</div>
          </div>
          <div class="row mx-0 w-100">
-            <div class="col-2 offset-1 text-left px-0">Volume: </div>
-            <div class="col-5 text-left px-0 align-self-center">{{latestPrice.volume}}</div>
-            <div class="col-2 text-left px-0" *ngIf="isMarketOpen">Bid Size: </div>
-            <div class="col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidSize}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center">Volume: </div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.volume}}</div>
+            <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Bid Size: </div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidSize}}</div>
          </div>
       </div>
       <!-- Company Description -->

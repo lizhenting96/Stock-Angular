@@ -7,7 +7,7 @@
    </div>
    
    <ng-template #elseBlock2>
-      <div class="col-lg-8 col-10 mx-auto px-0" >
+      <div class="col-lg-8 col-10 mx-auto px-0 pt-3" >
          <!-- first row, Ticker & Last Price -->
          <app-general 
             [companyDescription]="companyDescription" 
@@ -16,7 +16,31 @@
             [changePercent]="changePercent" 
             [curTimeStamp]="curTimeStamp" 
             [changeStatus]="changeStatus"
+            [popBuyEvent]='popBuyEvent.asObservable()'
+            (buyOnClick) = "open(content)"
          ></app-general>
+         <!-- Buy Button Pop up -->
+         <ng-template #content let-modal>
+            <div class="modal-header" ngbAutofocus>
+               <div>
+                  <h5 class="modal-title">{{companyDescription.ticker}}</h5>
+               </div>
+               <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body px-4">
+               <div>Current Price: {{lastPrice}}</div>
+               <div class="form-inline">
+                  <label class="mr-1" for="inlineNumberInput">Quantity</label>
+                  <input class="form-control" type="number" id="inlineNumberInput" [(ngModel)]="buyQuantity">
+               </div>
+            </div>
+            <div class="modal-footer d-flex">
+               <div class="mr-auto">Total:{{calculateTotal(buyQuantity)}}</div>
+               <button type="button" class="btn btn-success" (click)="buyOnClick()" [disabled]="!buyQuantity || !isQuantityCorrect(buyQuantity)">Buy</button>
+            </div>
+         </ng-template>
          <!-- Market Status -->
          <div class="row mt-2 mb-3">
             <div class="mx-auto" *ngIf="isMarketOpen" id="market-open">Market is Open</div>

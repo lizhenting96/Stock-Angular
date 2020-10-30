@@ -1,0 +1,14 @@
+.alert {
+   color: black;
+   font-size: 0.8rem;
+}
+.ticker, .last-price {
+   font-size: 1.8rem;
+}
+.company-name, .change {
+   font-size: 1rem;
+}
+.card button {
+   z-index: 2;
+   position: relative;
+}

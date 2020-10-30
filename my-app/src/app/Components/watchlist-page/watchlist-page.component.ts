@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../Services/local-storage.service'
+import { SearchService } from '../../Services/search.service'
 
 @Component({
   selector: 'app-watchlist-page',
@@ -7,9 +9,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WatchlistPageComponent implements OnInit {
 
-  constructor() { }
+  watchlist: any
+  tickerNamesArr: string[] = []
+  tickerInfoObj: any = {}
+  dataReady: boolean = false
 
-  ngOnInit(): void {
+  constructor(
+    private searchService: SearchService,
+    private localStorageService: LocalStorageService) {
   }
 
+  ngOnInit(): void {
+    this.watchlist = this.localStorageService.getAllWatchlist()
+    this.tickerNamesArr = Object.keys(this.watchlist)
+    if (this.tickerNamesArr.length > 0) {
+      this.searchService.getLatestPrice(this.tickerNamesArr.toString()).subscribe(results => {
+        var tmpChange: number, tmpChangeStatus: string
+        for (let i = 0; i < results.length; i++) {
+          tmpChange = results[i].last - results[i].prevClose
+          if (tmpChange > 0) {
+            tmpChangeStatus = 'POSITIVE'
+          }
+          else if (tmpChange > 0) {
+            tmpChangeStatus = 'ZERO'
+          }
+          else {
+            tmpChangeStatus = 'NEGATIVE'
+          }
+          this.tickerInfoObj[results[i].ticker] = {
+            companyName: this.watchlist[results[i].ticker],
+            last: results[i].last,
+            change: tmpChange.toFixed(2),
+            changePercent: (tmpChange * 100 / results[i].prevClose).toFixed(2),
+            changeStatus: tmpChangeStatus
+          }
+        }
+        this.dataReady = true
+      })
+    }
+    else {
+      this.dataReady = true
+    }
+  }
+  closeOnClick(ticker: string) {
+    this.localStorageService.removeFromWatchlist(ticker.toUpperCase())
+    this.watchlist = this.localStorageService.getAllWatchlist()
+    this.tickerNamesArr = Object.keys(this.watchlist)
+    delete this.tickerInfoObj[ticker]
+  }
 }

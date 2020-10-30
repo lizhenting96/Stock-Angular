@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { SearchService } from '../../Services/search.service'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from '../../Services/local-storage.service'
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -27,14 +30,21 @@ export class DetailsPageComponent implements OnInit {
   hisctoricalData: any[]
   // data for news
   newsData: any[]
+  // buy modal
+  buyQuantity: number
+  popBuyEvent: Subject<void> = new Subject<void>();
   // control
   changeStatus: string
   isMarketOpen: boolean = false
   tickerNotExists: boolean = false
-  // test
+  // refresh
   interval: any
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService,) {
+  constructor(
+    private route: ActivatedRoute, 
+    private searchService: SearchService,
+    private modalService: NgbModal,
+    private localStorageService: LocalStorageService) {
     this.tickerUrlParam = this.route.snapshot.params.ticker
   }
 
@@ -46,7 +56,8 @@ export class DetailsPageComponent implements OnInit {
       clearInterval(this.interval);
     }
   }
-
+  
+  // Data Fetching Methods
   private initializeAll(): void {
     // get company description when initializing
     this.searchService.getDescription(this.tickerUrlParam).subscribe(result => {
@@ -80,9 +91,9 @@ export class DetailsPageComponent implements OnInit {
           this.newsData = results.articles
         })
         // set refreshing
-        // this.interval = setInterval(() => {
-        //   this.updatePartial()
-        // }, 15000)
+        this.interval = setInterval(() => {
+          this.updatePartial()
+        }, 15000)
       }
     })
   }
@@ -91,18 +102,15 @@ export class DetailsPageComponent implements OnInit {
     // get company description
     this.searchService.getDescription(this.tickerUrlParam).subscribe(results => {
       this.companyDescription = results
-      console.log("company description updated!")
     })
     // get latest price 
     this.searchService.getLatestPrice(this.tickerUrlParam).subscribe(results => {
       this.latestPrice = results[0]
-      console.log("latest price updated!")
       this.analyzeLatestPrice(results[0])
       // get daily data for chart in summary tab
       // since we need dataDate after analyzeLatestPrice, we can only put it here
       this.searchService.getDailyData(this.tickerUrlParam, this.dataDate).subscribe(results => {
         this.dailyData = results
-        console.log("daily data updated!")
       })
     })
   }
@@ -130,5 +138,29 @@ export class DetailsPageComponent implements OnInit {
     if (Math.floor((curTime.getTime() - dataTime.getTime()) / 1000) < 60) {
       this.isMarketOpen = true
     }
+  }
+
+  // Buy Modal Methods
+  isQuantityCorrect(quantity: number): boolean {
+    var qStr = quantity.toString()
+    return quantity > 0 && /^\d+$/.test(qStr);
+  }
+  calculateTotal(quantity: number) {
+    
+    if (!quantity || !this.isQuantityCorrect(quantity)) {
+      return '0.00'
+    }
+    return (quantity * parseFloat(this.lastPrice)).toFixed(2)
+  }
+  open(content: any) {
+    this.buyQuantity = null
+    this.modalService.open(content)
+  }
+  buyOnClick(): void {
+    var buyTotal = this.buyQuantity * parseFloat(this.lastPrice)
+    this.localStorageService.addToPortfolio(this.companyDescription.ticker.toUpperCase(), this.buyQuantity, buyTotal)
+    this.modalService.dismissAll()
+    this.popBuyEvent.next();
+    console.log(Object.entries(localStorage))
   }
 }

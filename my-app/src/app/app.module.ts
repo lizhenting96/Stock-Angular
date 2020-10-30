@@ -35,7 +35,7 @@ import { NewsComponent } from './Components/details-page/news/news.component';
     SummaryComponent,
     GeneralComponent,
     ChartsComponentComponent,
-    NewsComponent
+    NewsComponent,
   ],
   imports: [
     BrowserModule,
