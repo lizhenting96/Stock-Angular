@@ -25,7 +25,9 @@ export class SummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // chart data
     this.updateDailyData()
+    // refresh
     this.interval = setInterval(() => {
       this.updateDailyData()
     }, 15000)

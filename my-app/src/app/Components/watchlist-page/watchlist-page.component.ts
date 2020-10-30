@@ -38,7 +38,7 @@ export class WatchlistPageComponent implements OnInit {
           }
           this.tickerInfoObj[results[i].ticker] = {
             companyName: this.watchlist[results[i].ticker],
-            last: results[i].last,
+            last: results[i].last.toFixed(2),
             change: tmpChange.toFixed(2),
             changePercent: (tmpChange * 100 / results[i].prevClose).toFixed(2),
             changeStatus: tmpChangeStatus
