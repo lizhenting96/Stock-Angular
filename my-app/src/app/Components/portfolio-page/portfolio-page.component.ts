@@ -65,6 +65,9 @@ export class PortfolioPageComponent implements OnInit {
         this.dataReady = true
       })
     }
+    else {
+      this.dataReady = true
+    }
   }
 
   // Buy Modal Methods

@@ -2,7 +2,7 @@
 
 html { min-height: 100%; position: relative;}
 body { height: 100%;margin: 0; margin-bottom: 90px; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.footer {
+/* .footer {
    font-size: 0.8rem;
    position: absolute;
    height: 50px;
@@ -12,4 +12,4 @@ body { height: 100%;margin: 0; margin-bottom: 90px; font-family: Roboto, "Helvet
    background-color:lightgray;
    color: black;
    text-align: center;
- }
+ } */

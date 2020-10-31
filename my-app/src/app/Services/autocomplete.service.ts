@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AutocompleteService {
 
-  getSuggestionsUrl: string = 'http://localhost:8080/autocomplete'
+  getSuggestionsUrl: string = 'http://localhost:8081/api/autocomplete'
+  // getSuggestionsUrl: string = '/api/autocomplete'
 
   constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
 

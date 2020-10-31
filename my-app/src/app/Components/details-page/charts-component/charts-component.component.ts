@@ -86,7 +86,8 @@ export class ChartsComponentComponent implements OnInit {
     plotOptions: {
         series: {
             dataGrouping: {
-                units: [['day', [1]], ['week', [1]], ['month', [1]]]
+                units: [['day', [1]], ['week', [1]], ['month', [1]]],
+                groupPixelWidth: 15
             }
         }
     },

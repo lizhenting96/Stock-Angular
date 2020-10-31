@@ -116,7 +116,7 @@ export class DetailsPageComponent implements OnInit {
   }
 
   private analyzeLatestPrice(latestPrice: any): void {
-    this.lastPrice = latestPrice.last.toFixed(2)
+    this.lastPrice = latestPrice.last
     this.change = (latestPrice.last - latestPrice.prevClose).toFixed(2)
     this.changePercent = ((latestPrice.last - latestPrice.prevClose) * 100 / latestPrice.prevClose).toFixed(2)
     if (parseFloat(this.change) > 0) {
@@ -150,10 +150,10 @@ export class DetailsPageComponent implements OnInit {
     if (!quantity || !this.isQuantityCorrect(quantity)) {
       return '0.00'
     }
-    return (quantity * parseFloat(this.lastPrice)).toFixed(2)
+    return (quantity * parseFloat(this.lastPrice))
   }
   open(content: any) {
-    this.buyQuantity = null
+    this.buyQuantity = 0
     this.modalService.open(content)
   }
   buyOnClick(): void {

@@ -5,35 +5,35 @@
       <div class="row mx-0 mb-5 px-0 px-md-3 text-center">
          <div class="row mx-0 w-100">
             <div class="col-md-2 col-3 text-left px-0 align-self-center">High Price: </div>
-            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.high.toFixed(2)}}</div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.high | number : '1.2-2'}}</div>
             <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Mid Price: </div>
-            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && latestPrice.mid">{{latestPrice.mid.toFixed(2)}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && latestPrice.mid">{{latestPrice.mid | number : '1.2-2'}}</div>
             <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen && !latestPrice.mid"> - </div>
 
          </div>
          <div class="row mx-0 w-100">
             <div class="col-md-2 col-3 text-left px-0 align-self-center">Low Price: </div>
-            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.low.toFixed(2)}}</div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.low | number : '1.2-2'}}</div>
             <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Ask Price: </div>
-            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askPrice.toFixed(2)}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askPrice | number : '1.2-2'}}</div>
          </div>
          <div class="row mx-0 w-100">
             <div class="col-md-2 col-3 text-left px-0 align-self-center">Open Price: </div>
-            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.open.toFixed(2)}}</div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.open | number : '1.2-2'}}</div>
             <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Ask Size: </div>
-            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askSize}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.askSize | number : '1.2-2'}}</div>
          </div>
          <div class="row mx-0 w-100">
             <div class="col-md-2 col-3 text-left px-0 align-self-center">Prev. Close: </div>
-            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.prevClose.toFixed(2)}}</div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.prevClose | number : '1.2-2'}}</div>
             <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Bid Price: </div>
-            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidPrice.toFixed(2)}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidPrice | number : '1.2-2'}}</div>
          </div>
          <div class="row mx-0 w-100">
             <div class="col-md-2 col-3 text-left px-0 align-self-center">Volume: </div>
-            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.volume}}</div>
+            <div class="col-md-6 col-4 text-left px-0 align-self-center">{{latestPrice.volume | number}}</div>
             <div class="col-md-2 col-3 text-left px-0 align-self-center" *ngIf="isMarketOpen">Bid Size: </div>
-            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidSize}}</div>
+            <div class="col-md-2 col-2 text-left px-0 align-self-center" *ngIf="isMarketOpen">{{latestPrice.bidSize | number : '1.2-2'}}</div>
          </div>
       </div>
       <!-- Company Description -->

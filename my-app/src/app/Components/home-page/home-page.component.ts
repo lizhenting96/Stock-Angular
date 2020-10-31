@@ -37,6 +37,7 @@ export class HomePageComponent implements OnInit {
       setTimeout(() => {
         // console.log(this.form.get("ticker"))
         if (this.form.get("ticker").value == input) {
+          this.filteredOptions = []
           if (this.form.get("ticker").value) {
             this.autoCompleteService.getSuggestions(input).subscribe(result => {
               this.filteredOptions = result

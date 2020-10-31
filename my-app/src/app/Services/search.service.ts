@@ -8,11 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class SearchService {
 
-  descriptionUrl: string = 'http://localhost:8080/getdescription'
-  latestpriceUrl: string = 'http://localhost:8080/getlatestprice'
-  dailyDataUrl: string = 'http://localhost:8080/getdaily'
-  historyUrl: string = 'http://localhost:8080/gethistory'
-  newsUrl: string = 'http://localhost:8080/getnews'
+  descriptionUrl: string = 'http://localhost:8081/api/getdescription'
+  latestpriceUrl: string = 'http://localhost:8081/api/getlatestprice'
+  dailyDataUrl: string = 'http://localhost:8081/api/getdaily'
+  historyUrl: string = 'http://localhost:8081/api/gethistory'
+  newsUrl: string = 'http://localhost:8081/api/getnews'
+  
+  // descriptionUrl: string = '/api/getdescription'
+  // latestpriceUrl: string = '/api/getlatestprice'
+  // dailyDataUrl: string = '/api/getdaily'
+  // historyUrl: string = '/api/gethistory'
+  // newsUrl: string = '/api/getnews'
   constructor(private router: Router, private http: HttpClient) { }
 
   onSearch(ticker: string) {
