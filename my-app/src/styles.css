@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html { min-height: 100%; position: relative;}
+body { height: 100%;margin: 0; margin-bottom: 90px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.footer {
+   font-size: 0.8rem;
+   position: absolute;
+   height: 50px;
+   line-height: 50px;
+   bottom: 0;
+   width: 100%;
+   background-color:lightgray;
+   color: black;
+   text-align: center;
+ }

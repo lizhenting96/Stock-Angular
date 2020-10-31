@@ -4,9 +4,11 @@
 }
 .ticker, .last-price {
    font-size: 1.8rem;
+   font-weight: 500;
 }
 .company-name, .change {
    font-size: 1rem;
+   font-weight: 500;
 }
 .card button {
    z-index: 2;

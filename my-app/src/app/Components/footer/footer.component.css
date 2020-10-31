@@ -1,10 +1,11 @@
 footer {
-  position: fixed;
-  left: 0;
+  font-size: 0.8rem;
+  position: absolute;
+  height: 50px;
+  line-height: 50px;
   bottom: 0;
   width: 100%;
   background-color:lightgray;
   color: black;
   text-align: center;
-  padding: 1%;
 }

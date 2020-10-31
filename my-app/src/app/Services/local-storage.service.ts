@@ -62,14 +62,14 @@ export class LocalStorageService {
     return false
   }
 
-  removeFromPortfolio(ticker: string) {
-    ticker = ticker.toUpperCase()
-    var curPortfolioObj = JSON.parse(localStorage.getItem("portfolio"))
-    delete curPortfolioObj[ticker]
-    localStorage.setItem("portfolio", JSON.stringify(curPortfolioObj))
-  }
+  // removeFromPortfolio(ticker: string) {
+  //   ticker = ticker.toUpperCase()
+  //   var curPortfolioObj = JSON.parse(localStorage.getItem("portfolio"))
+  //   delete curPortfolioObj[ticker]
+  //   localStorage.setItem("portfolio", JSON.stringify(curPortfolioObj))
+  // }
 
-  addToPortfolio(ticker: string, newShare: number, newCost: number) {
+  addToPortfolio(ticker: string, newShare: number, newCost: number, companyName: string) {
     ticker = ticker.toUpperCase()
     var curPortfolio = localStorage.getItem("portfolio")
     var curPortfolioObj: any, tickerObj: any
@@ -86,11 +86,40 @@ export class LocalStorageService {
     }
     else {
       tickerObj = {
+        companyName: companyName,
         totalShare: newShare,
         totalCost: newCost
       }
     }
     curPortfolioObj[ticker] = tickerObj
     localStorage.setItem("portfolio", JSON.stringify(curPortfolioObj))
+  }
+  minusFromPortfolio(ticker: string, sellShare: number, sellTotal: number) {
+    ticker = ticker.toUpperCase()
+    var curPortfolio = localStorage.getItem("portfolio")
+    var curPortfolioObj: any, tickerObj: any
+
+    curPortfolioObj = JSON.parse(curPortfolio)
+
+    
+    tickerObj = curPortfolioObj[ticker]
+    if (tickerObj.totalShare <= sellShare) {
+      delete curPortfolioObj[ticker]
+      localStorage.setItem("portfolio", JSON.stringify(curPortfolioObj))
+    }
+    else {
+      tickerObj.totalShare -= sellShare
+      tickerObj.totalCost -= sellTotal
+      curPortfolioObj[ticker] = tickerObj
+      localStorage.setItem("portfolio", JSON.stringify(curPortfolioObj))
+    }
+    
+  }
+  getAllPortfolio(): any {
+    var curPortfolio = localStorage.getItem("portfolio")
+    if (curPortfolio) {
+      return JSON.parse(curPortfolio)
+    }
+    return {}
   }
 }

@@ -30,7 +30,7 @@ export class WatchlistPageComponent implements OnInit {
           if (tmpChange > 0) {
             tmpChangeStatus = 'POSITIVE'
           }
-          else if (tmpChange > 0) {
+          else if (tmpChange == 0) {
             tmpChangeStatus = 'ZERO'
           }
           else {

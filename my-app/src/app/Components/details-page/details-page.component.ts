@@ -158,9 +158,8 @@ export class DetailsPageComponent implements OnInit {
   }
   buyOnClick(): void {
     var buyTotal = this.buyQuantity * parseFloat(this.lastPrice)
-    this.localStorageService.addToPortfolio(this.companyDescription.ticker.toUpperCase(), this.buyQuantity, buyTotal)
+    this.localStorageService.addToPortfolio(this.companyDescription.ticker, this.buyQuantity, buyTotal, this.companyDescription.name)
     this.modalService.dismissAll()
     this.popBuyEvent.next();
-    console.log(Object.entries(localStorage))
   }
 }

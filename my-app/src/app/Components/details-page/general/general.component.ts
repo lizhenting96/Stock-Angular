@@ -61,6 +61,5 @@ export class GeneralComponent implements OnInit {
       this._watchlist.next(`${this.companyDescription.ticker} added to Watchlist.`);
     }
     this.tickerAlreadyWatched = !this.tickerAlreadyWatched
-    console.log(Object.entries(localStorage))
   }
 }

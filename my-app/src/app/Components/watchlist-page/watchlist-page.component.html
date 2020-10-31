@@ -1,4 +1,4 @@
-<div class="col-lg-8 col-10 mx-auto px-0">
+<div class="col-lg-8 col-11 mx-auto px-0">
    <h1 class="my-5">My Watchlist</h1>
    <mat-spinner class="mx-auto" *ngIf="!dataReady; else elseBlock1"></mat-spinner>
    <ng-template #elseBlock1>
@@ -53,7 +53,7 @@
                         </svg>
                         {{tickerInfo.value.change}} ({{tickerInfo.value.changePercent}}%)
                      </span>
-                     <span class="float-right text-right text-success change" *ngIf="tickerInfo.value.changeStatus === 'ZERO'">
+                     <span class="float-right text-right change" *ngIf="tickerInfo.value.changeStatus === 'ZERO'">
                         {{tickerInfo.value.change}} ({{tickerInfo.value.changePercent}}%)
                      </span>
                   </div>

@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomePageComponent},
   { path: 'watchlist', pathMatch: 'full', component: WatchlistPageComponent},
   { path: 'portfolio', pathMatch: 'full', component: PortfolioPageComponent},
-  { path: 'details/:ticker', pathMatch: 'prefix',component: DetailsPageComponent}
+  { path: 'details/:ticker', pathMatch: 'prefix',component: DetailsPageComponent},
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({
