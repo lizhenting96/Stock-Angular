@@ -1,10 +1,10 @@
 const express = require('express')
 const fetch = require('node-fetch')
-var cors = require('cors')
+// var cors = require('cors')
 const port = process.env.PORT || 8081
 
 const app = express()
-app.use(cors())
+// app.use(cors())
 app.use(express.static(process.cwd()+"/my-app/dist/my-app/"));
 
 // route: Get Company Description
