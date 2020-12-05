@@ -8,11 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class SearchService {
 
+<<<<<<< HEAD
   descriptionUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getdescription'
   latestpriceUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getlatestprice'
   dailyDataUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getdaily'
   historyUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/gethistory'
   newsUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getnews'
+=======
+  descriptionUrl: string = 'http://localhost:8081/api/getdescription'
+  latestpriceUrl: string = 'http://localhost:8081/api/getlatestprice'
+  dailyDataUrl: string = 'http://localhost:8081/api/getdaily'
+  historyUrl: string = 'http://localhost:8081/api/gethistory'
+  newsUrl: string = 'http://localhost:8081/api/getnews'
+>>>>>>> parent of 5757f12... Gulp deploy version
   
   // descriptionUrl: string = '/api/getdescription'
   // latestpriceUrl: string = '/api/getlatestprice'
