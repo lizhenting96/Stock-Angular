@@ -24,4 +24,11 @@ export class NewsComponent implements OnInit {
     var dateObj = new Date(date)
     return new Intl.DateTimeFormat('en-US', { month: 'long', day: '2-digit', year: 'numeric' }).format(dateObj)
   }
+
+  getTwitterUrl(title: string, url: string): string {
+    return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title)  + '%20' + encodeURIComponent(url)
+  }
+  getFacebookUrl(url: string): string {
+    return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url)
+  }
 }

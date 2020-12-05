@@ -3,8 +3,10 @@ import * as Highcharts from 'highcharts/highstock';
 import IndicatorsCore from "highcharts/indicators/indicators";
 import vbp from 'highcharts/indicators/volume-by-price';
 
-IndicatorsCore(Highcharts);
-vbp(Highcharts);
+if (typeof Highcharts === 'object') {
+    IndicatorsCore(Highcharts);
+    vbp(Highcharts);
+}
 
 @Component({
   selector: 'app-charts-component',

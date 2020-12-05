@@ -72,7 +72,7 @@ export class PortfolioPageComponent implements OnInit {
 
   // Buy Modal Methods
   buyOpen(content: any) {
-    this.buyQuantity = null
+    this.buyQuantity = 0
     this.modalService.open(content)
   }
   isBuyQuantityCorrect(quantity: number): boolean {
@@ -94,7 +94,7 @@ export class PortfolioPageComponent implements OnInit {
 
   // Sell Modal Methods
   sellOpen(content: any) {
-    this.sellQuantity = null
+    this.sellQuantity = 0
     this.modalService.open(content)
   }
   isSellQuantityCorrect(quantity: number, maxQuantity: number): boolean {
@@ -111,7 +111,6 @@ export class PortfolioPageComponent implements OnInit {
     var sellTotal = this.sellQuantity * parseFloat(price)
     this.localStorageService.minusFromPortfolio(ticker, this.sellQuantity, sellTotal)
     this.modalService.dismissAll()
-    console.log(Object.entries(localStorage))
     this.updateData()
   }
 }

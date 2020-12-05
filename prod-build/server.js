@@ -1,10 +1,10 @@
 const express = require('express')
 const fetch = require('node-fetch')
-// var cors = require('cors')
+var cors = require('cors')
 const port = process.env.PORT || 8081
 
 const app = express()
-// app.use(cors())
+app.use(cors())
 app.use(express.static(process.cwd()+"/my-app/dist/my-app/"));
 
 // route: Get Company Description
@@ -50,6 +50,7 @@ app.get('/api/getnews/:ticker', (req, res) => {
   .then(result => result.json())
   .then(body => res.json(body))
 })
+
 // route: Autocomplete
 app.get('/api/autocomplete/:input', (req, res) => {
   var input = req.params.input
@@ -58,6 +59,32 @@ app.get('/api/autocomplete/:input', (req, res) => {
   .then(body => res.json(body))
 })
 
+// route: send all endpoints in a table
+app.get('/api/getallapis', (req, res) => {
+  res.send(
+    `<table style="width:60%" align="center">
+    <tbody><tr>
+      <td><a href="/api/getdescription/aapl">End Point for Commpany Description</a></td>
+    </tr>
+    <tr>
+      <td><a href="/api/getlatestprice/aapl">End Point for Latest Price</a></td>
+    </tr>
+    <tr>
+      <td><a href="/api/getdaily/aapl/2020-11-4">End Point for Daily Chart data (Example date: 2020-11-4)</a></td>
+    </tr>
+    <tr>
+      <td><a href="/api/gethistory/aapl">End Point for Historical data</a></td>
+    </tr>
+    <tr>
+      <td><a href="/api/getnews/aapl">End Point for News</a></td>
+    </tr>
+    <tr>
+      <td><a href="/api/autocomplete/aap">End Point for Autocomplete (Example Input: "aap")</a></td>
+    </tr>
+    </tbody></table>`
+  )
+})
+// 404 return to home page
 app.get('*', (req, res) => {
   res.sendFile(process.cwd()+"/my-app/dist/my-app/index.html")
 })

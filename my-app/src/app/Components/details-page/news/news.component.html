@@ -3,10 +3,10 @@
 
       <div class="card h-100 p-3" (click)="open(content)">
          <div class="row mx-0 my-auto">
-            <div class="col-lg-3 col-12 align-self-center p-0">
-               <img class="card-img pr-lg-2 img-fluid" src="{{news.urlToImage}}" alt="News Img">
+            <div class="col-md-3 col-12 align-self-center p-0">
+               <img class="card-img pr-md-2 img-fluid" src="{{news.urlToImage}}" alt="News Img">
             </div>
-            <div class="col-lg-9 col-12 px-0 d-flex align-items-center">
+            <div class="col-md-9 col-12 px-0 d-flex align-items-center">
                <div class="card-body p-0">
                   <p class="card-text text-left">
                      {{news.title}}
@@ -34,16 +34,16 @@
             <div class="p-3 border border-darken-1 rounded">
                <p class="mb-2" id="share-text">Share</p>
                <a
-                  href="https://twitter.com/intent/tweet?text={{news.title}} {{news.url}}"
-                  target="_blank"
-                  id="twitter-link">
-                  <i class="fa fa-twitter fa-2x mr-1"></i>
-               </a>
-               <a
-                  href="https://www.facebook.com/sharer/sharer.php?u={{news.url}}"
-                  target="_blank">
-                  <i class="fa fa-facebook-official fa-2x ml-1"></i>
-               </a>
+               href="{{getTwitterUrl(news.title, news.url)}}"
+               target="_blank"
+               id="twitter-link">
+               <i class="fa fa-twitter fa-2x mr-1"></i>
+            </a>
+            <a
+               href="{{getFacebookUrl(news.url)}}"
+               target="_blank">
+               <i class="fa fa-facebook-official fa-2x ml-1"></i>
+            </a>
             </div>
             </div>
 

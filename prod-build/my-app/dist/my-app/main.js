@@ -1044,7 +1044,7 @@ class PortfolioPageComponent {
     }
     // Buy Modal Methods
     buyOpen(content) {
-        this.buyQuantity = null;
+        this.buyQuantity = 0;
         this.modalService.open(content);
     }
     isBuyQuantityCorrect(quantity) {
@@ -1065,7 +1065,7 @@ class PortfolioPageComponent {
     }
     // Sell Modal Methods
     sellOpen(content) {
-        this.sellQuantity = null;
+        this.sellQuantity = 0;
         this.modalService.open(content);
     }
     isSellQuantityCorrect(quantity, maxQuantity) {
@@ -1082,7 +1082,6 @@ class PortfolioPageComponent {
         var sellTotal = this.sellQuantity * parseFloat(price);
         this.localStorageService.minusFromPortfolio(ticker, this.sellQuantity, sellTotal);
         this.modalService.dismissAll();
-        console.log(Object.entries(localStorage));
         this.updateData();
     }
 }
@@ -1978,6 +1977,12 @@ class DetailsPageComponent {
                 this.searchService.getLatestPrice(this.tickerUrlParam).subscribe(results => {
                     this.latestPrice = results[0];
                     this.analyzeLatestPrice(results[0]);
+                    // set refreshing when market is open
+                    if (this.isMarketOpen) {
+                        this.interval = setInterval(() => {
+                            this.updatePartial();
+                        }, 15000);
+                    }
                     // get daily data for chart in summary tab when initializing
                     // since we need dataDate after analyzeLatestPrice, we can only put it here
                     this.searchService.getDailyData(this.tickerUrlParam, this.dataDate).subscribe(results => {
@@ -1991,10 +1996,6 @@ class DetailsPageComponent {
                 this.searchService.getNews(this.tickerUrlParam).subscribe(results => {
                     this.newsData = results.articles;
                 });
-                // set refreshing
-                this.interval = setInterval(() => {
-                    this.updatePartial();
-                }, 15000);
             }
         });
     }
@@ -2013,6 +2014,7 @@ class DetailsPageComponent {
                 this.dailyData = results;
             });
         });
+        // console.log("data updated!")
     }
     analyzeLatestPrice(latestPrice) {
         this.lastPrice = latestPrice.last;
@@ -2300,6 +2302,32 @@ class WatchlistPageComponent {
         this.watchlist = this.localStorageService.getAllWatchlist();
         this.tickerNamesArr = Object.keys(this.watchlist);
         delete this.tickerInfoObj[ticker];
+        // update the data from api when any ticker is removed from wathlist
+        // update only there are remaining tickers in watchlist
+        if (this.tickerNamesArr.length > 0) {
+            this.searchService.getLatestPrice(this.tickerNamesArr.toString()).subscribe(results => {
+                var tmpChange, tmpChangeStatus;
+                for (let i = 0; i < results.length; i++) {
+                    tmpChange = results[i].last - results[i].prevClose;
+                    if (tmpChange > 0) {
+                        tmpChangeStatus = 'POSITIVE';
+                    }
+                    else if (tmpChange == 0) {
+                        tmpChangeStatus = 'ZERO';
+                    }
+                    else {
+                        tmpChangeStatus = 'NEGATIVE';
+                    }
+                    this.tickerInfoObj[results[i].ticker] = {
+                        companyName: this.watchlist[results[i].ticker],
+                        last: results[i].last,
+                        change: tmpChange,
+                        changePercent: (tmpChange * 100 / results[i].prevClose),
+                        changeStatus: tmpChangeStatus
+                    };
+                }
+            });
+        }
     }
 }
 WatchlistPageComponent.ɵfac = function WatchlistPageComponent_Factory(t) { return new (t || WatchlistPageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_Services_search_service__WEBPACK_IMPORTED_MODULE_1__["SearchService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_Services_local_storage_service__WEBPACK_IMPORTED_MODULE_2__["LocalStorageService"])); };
@@ -2643,9 +2671,9 @@ function NewsComponent_div_1_ng_template_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("href", news_r1.url, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate2"]("href", "https://twitter.com/intent/tweet?text=", news_r1.title, " ", news_r1.url, "", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("href", ctx_r3.getTwitterUrl(news_r1.title, news_r1.url), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate1"]("href", "https://www.facebook.com/sharer/sharer.php?u=", news_r1.url, "", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("href", ctx_r3.getFacebookUrl(news_r1.url), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
 } }
 function NewsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -2665,7 +2693,7 @@ function NewsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, NewsComponent_div_1_ng_template_9_Template, 24, 8, "ng-template", null, 10, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, NewsComponent_div_1_ng_template_9_Template, 24, 7, "ng-template", null, 10, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const news_r1 = ctx.$implicit;
@@ -2687,9 +2715,15 @@ class NewsComponent {
         var dateObj = new Date(date);
         return new Intl.DateTimeFormat('en-US', { month: 'long', day: '2-digit', year: 'numeric' }).format(dateObj);
     }
+    getTwitterUrl(title, url) {
+        return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '%20' + encodeURIComponent(url);
+    }
+    getFacebookUrl(url) {
+        return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+    }
 }
 NewsComponent.ɵfac = function NewsComponent_Factory(t) { return new (t || NewsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"])); };
-NewsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NewsComponent, selectors: [["app-news"]], inputs: { newsData: "newsData" }, decls: 2, vars: 1, consts: [[1, "row", "mx-0", "mt-2", "px-2", "align-items-stretch"], ["class", "col-lg-6 px-3 py-2", 4, "ngFor", "ngForOf"], [1, "col-lg-6", "px-3", "py-2"], [1, "card", "h-100", "p-3", 3, "click"], [1, "row", "mx-0", "my-auto"], [1, "col-lg-3", "col-12", "align-self-center", "p-0"], ["alt", "News Img", 1, "card-img", "pr-lg-2", "img-fluid", 3, "src"], [1, "col-lg-9", "col-12", "px-0", "d-flex", "align-items-center"], [1, "card-body", "p-0"], [1, "card-text", "text-left"], ["content", ""], ["ngbAutofocus", "", 1, "modal-header"], ["id", "modal-basic-title", 1, "modal-title"], ["id", "published-date", 1, "text-secondary", "mt-n1"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], ["id", "description", 1, "mb-0", 3, "innerHTML"], ["id", "more-details", 1, "text-secondary"], ["target", "_blank", 3, "href"], [1, "p-3", "border", "border-darken-1", "rounded"], ["id", "share-text", 1, "mb-2"], ["target", "_blank", "id", "twitter-link", 3, "href"], [1, "fa", "fa-twitter", "fa-2x", "mr-1"], [1, "fa", "fa-facebook-official", "fa-2x", "ml-1"]], template: function NewsComponent_Template(rf, ctx) { if (rf & 1) {
+NewsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NewsComponent, selectors: [["app-news"]], inputs: { newsData: "newsData" }, decls: 2, vars: 1, consts: [[1, "row", "mx-0", "mt-2", "px-2", "align-items-stretch"], ["class", "col-lg-6 px-3 py-2", 4, "ngFor", "ngForOf"], [1, "col-lg-6", "px-3", "py-2"], [1, "card", "h-100", "p-3", 3, "click"], [1, "row", "mx-0", "my-auto"], [1, "col-md-3", "col-12", "align-self-center", "p-0"], ["alt", "News Img", 1, "card-img", "pr-md-2", "img-fluid", 3, "src"], [1, "col-md-9", "col-12", "px-0", "d-flex", "align-items-center"], [1, "card-body", "p-0"], [1, "card-text", "text-left"], ["content", ""], ["ngbAutofocus", "", 1, "modal-header"], ["id", "modal-basic-title", 1, "modal-title"], ["id", "published-date", 1, "text-secondary", "mt-n1"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], ["id", "description", 1, "mb-0", 3, "innerHTML"], ["id", "more-details", 1, "text-secondary"], ["target", "_blank", 3, "href"], [1, "p-3", "border", "border-darken-1", "rounded"], ["id", "share-text", 1, "mb-2"], ["target", "_blank", "id", "twitter-link", 3, "href"], [1, "fa", "fa-twitter", "fa-2x", "mr-1"], [1, "fa", "fa-facebook-official", "fa-2x", "ml-1"]], template: function NewsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, NewsComponent_div_1_Template, 11, 2, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();

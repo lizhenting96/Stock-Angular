@@ -38,7 +38,7 @@ import { NewsComponent } from './Components/details-page/news/news.component';
     NewsComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

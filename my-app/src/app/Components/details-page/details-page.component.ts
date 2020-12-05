@@ -77,6 +77,12 @@ export class DetailsPageComponent implements OnInit {
         this.searchService.getLatestPrice(this.tickerUrlParam).subscribe(results => {
           this.latestPrice = results[0]
           this.analyzeLatestPrice(results[0])
+          // set refreshing when market is open
+          if (this.isMarketOpen) {
+            this.interval = setInterval(() => {
+              this.updatePartial()
+            }, 15000)
+          }
           // get daily data for chart in summary tab when initializing
           // since we need dataDate after analyzeLatestPrice, we can only put it here
           this.searchService.getDailyData(this.tickerUrlParam, this.dataDate).subscribe(results => {
@@ -90,10 +96,7 @@ export class DetailsPageComponent implements OnInit {
         this.searchService.getNews(this.tickerUrlParam).subscribe(results => {
           this.newsData = results.articles
         })
-        // set refreshing
-        this.interval = setInterval(() => {
-          this.updatePartial()
-        }, 15000)
+        
       }
     })
   }
@@ -113,6 +116,7 @@ export class DetailsPageComponent implements OnInit {
         this.dailyData = results
       })
     })
+    // console.log("data updated!")
   }
 
   private analyzeLatestPrice(latestPrice: any): void {

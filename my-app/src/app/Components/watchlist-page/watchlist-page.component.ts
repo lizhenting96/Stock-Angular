@@ -56,5 +56,31 @@ export class WatchlistPageComponent implements OnInit {
     this.watchlist = this.localStorageService.getAllWatchlist()
     this.tickerNamesArr = Object.keys(this.watchlist)
     delete this.tickerInfoObj[ticker]
+    // update the data from api when any ticker is removed from wathlist
+    // update only there are remaining tickers in watchlist
+    if (this.tickerNamesArr.length > 0) {
+      this.searchService.getLatestPrice(this.tickerNamesArr.toString()).subscribe(results => {
+        var tmpChange: number, tmpChangeStatus: string
+        for (let i = 0; i < results.length; i++) {
+          tmpChange = results[i].last - results[i].prevClose
+          if (tmpChange > 0) {
+            tmpChangeStatus = 'POSITIVE'
+          }
+          else if (tmpChange == 0) {
+            tmpChangeStatus = 'ZERO'
+          }
+          else {
+            tmpChangeStatus = 'NEGATIVE'
+          }
+          this.tickerInfoObj[results[i].ticker] = {
+            companyName: this.watchlist[results[i].ticker],
+            last: results[i].last,
+            change: tmpChange,
+            changePercent: (tmpChange * 100 / results[i].prevClose),
+            changeStatus: tmpChangeStatus
+          }
+        }
+      })
+    }
   }
 }
