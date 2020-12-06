@@ -29,3 +29,6 @@ functions:
     events:
       - http: GET {proxy+}
       - http: GET /
+      - http:
+          path: /{any+}
+          method: ANY

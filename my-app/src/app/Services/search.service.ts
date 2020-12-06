@@ -8,11 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class SearchService {
 
-  // descriptionUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getdescription'
-  // latestpriceUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getlatestprice'
-  // dailyDataUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getdaily'
-  // historyUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/gethistory'
-  // newsUrl: string = 'https://kmjt00nm75.execute-api.us-east-1.amazonaws.com/dev/api/getnews'
   // descriptionUrl: string = 'http://localhost:8081/api/getdescription'
   // latestpriceUrl: string = 'http://localhost:8081/api/getlatestprice'
   // dailyDataUrl: string = 'http://localhost:8081/api/getdaily'

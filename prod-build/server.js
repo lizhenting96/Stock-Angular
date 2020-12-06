@@ -1,3 +1,4 @@
+// const serverless = require('serverless-http');
 const express = require('express')
 const fetch = require('node-fetch')
 var cors = require('cors')
@@ -92,3 +93,4 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+// module.exports.handler = serverless(app);
